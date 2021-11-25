@@ -3,6 +3,7 @@
  <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
  <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
  <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+{% load static %}
  <html>
      <head>
          <meta charset="utf-8">
@@ -29,13 +30,55 @@
 
          <!-- FONTS -->
          <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
-         
+
      </head>
      <body>
          <!-- Navbar -->
+         <nav class="navbar navbar-default techfont custom-navbar navbar-fixed-top">
+            <div Class="container">
+                <ul class="nav navbar-nav">
+                    <li><a class='navbar-brand bigbrand' href='{% url 'post_list' %}'>My Blog</a></li>
+                    <li><a href='{% url 'about' %}'>About</a></li>
+                    <li><a href='https://www.github.com'>GitHub</a></li>
+                    <li><a href='https://www.linkedin.com'>LinkedIn</a></li>
+                    <li><a href='https://www.twitter.com'>Twitter</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                        <li>
+                            <a href="{% url 'post_new' %}">new Post</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'post_draft_list' %}">Drafts</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'logout' %}">Log Out</a>
+                        </li>
+                        <li>
+                            <a>Welcome: {{ user.username }}</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url 'login' %}">Log In</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+         </nav>
 
          <!-- Content Block -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>{% block content %}{% endblock %}</h1>
+                </div>
+                <div class="col-md-4">
+                    <h2>Sidebar</h2>
+                </div>
+            </div>
+        </div>
          
-         <script src="" async defer></script>
+        <script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
      </body>
  </html>

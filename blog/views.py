@@ -22,7 +22,7 @@ class AboutView(TemplateView):
     template_name = 'about.html'
 
 
-class PostListViews(ListView):
+class PostListView(ListView):
     model = Post
 
     def get_querryset(self):
