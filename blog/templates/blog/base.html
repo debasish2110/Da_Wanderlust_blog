@@ -34,9 +34,9 @@
      </head>
      <body>
          <!-- Navbar -->
-         <nav class="navbar navbar-default techfont custom-navbar navbar-fixed-top">
+         <nav class="navbar navbar-expand-lg bg-light techfont bg-dark">
             <div Class="container">
-                <ul class="nav navbar-nav">
+                <ul class="navbar-nav align-items-center">
                     <li><a class='navbar-brand bigbrand' href='{% url 'post_list' %}'>My Blog</a></li>
                     <li><a href='{% url 'about' %}'>About</a></li>
                     <li><a href='https://www.github.com'>GitHub</a></li>
@@ -44,41 +44,30 @@
                     <li><a href='https://www.twitter.com'>Twitter</a></li>
                 </ul>
 
-                <ul class="nav navbar-nav navbar-right">
+                <ul class="navbar-nav align-items-center ml-auto">
                     {% if user.is_authenticated %}
-                        <li>
-                            <a href="{% url 'post_new' %}">new Post</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'post_draft_list' %}">Drafts</a>
-                        </li>
-                        <li>
-                            <a href="{% url 'logout' %}">Log Out</a>
-                        </li>
-                        <li>
-                            <a>Welcome: {{ user.username }}</a>
-                        </li>
+                        <a href="{% url 'post_new' %}">new Post</a>
+                        <a href="{% url 'post_draft_list' %}">Drafts</a>
+                        <a href="{% url 'logout' %}">Log Out</a>
+                        <a>Welcome: {{ user.username }}</a>
                     {% else %}
-                        <li>
-                            <a href="{% url 'login' %}">Log In</a>
-                        </li>
+                        <a href="{% url 'login' %}">Log In</a>
                     {% endif %}
                 </ul>
             </div>
          </nav>
 
          <!-- Content Block -->
-        <div class="container">
+        <div class="content container">
             <div class="row">
                 <div class="col-md-8">
-                    <h1>{% block content %}{% endblock %}</h1>
+                <div class="blog_posts">
+                    {% block content %}
+                    {% endblock %}
                 </div>
-                <div class="col-md-4">
-                    <h2>Sidebar</h2>
                 </div>
             </div>
         </div>
-         
         <script type="text/javascript" src="{% static 'js/blog.js' %}"></script>
      </body>
  </html>
